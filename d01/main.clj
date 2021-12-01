@@ -3,26 +3,25 @@
   (:require [clojure.string :as string]
             [clojure.edn :as edn]))
 ;; generic
-(defn input [] (slurp "input"))
+(defn read-input []
+  (->> (slurp "input")
+       (string/split-lines)
+       (map edn/read-string)))
+
 ;; specific
+(defn count-increasing-pairs [seq]
+  (->> seq
+       (partition 2 1)
+       (map (fn [pair] (apply < pair)))
+       (filter identity)
+       (count)))
+
 (println "Part 1")
-(println (->>
-          (input)
-          (string/split-lines)
-          (map edn/read-string)
-          (partition 2 1)
-          (map (fn [pair] (apply < pair)))
-          (filter identity)
-          (count)))
+(println (count-increasing-pairs (read-input)))
 
 (println "Part 2")
-(println (->>
-          (input)
-          (string/split-lines)
-          (map edn/read-string)
-          (partition 3 1)
-          (map (fn [triple] (apply + triple)))
-          (partition 2 1)
-          (map (fn [pair] (apply < pair)))
-          (filter identity)
-          (count)))
+(println
+ (->> (read-input)
+      (partition 3 1)
+      (map (fn [triple] (apply + triple)))
+      (count-increasing-pairs)))
