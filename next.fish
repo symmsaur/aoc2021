@@ -13,8 +13,7 @@ set padded_num (printf "%02d" $num)
 set new_dir d$padded_num
 mkdir -p $new_dir
 curl --cookie session=(cat session) \
-  https://adventofcode.com/2020/day/$num/input \
+  https://adventofcode.com/2021/day/$num/input \
   > $new_dir/input
 
 cd d$padded_num
-cargo init
