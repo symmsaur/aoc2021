@@ -22,5 +22,5 @@
 (println
  (->> (read-input)
       (partition 3 1)
-      (map (fn [triple] (apply + triple)))
+      (map #(apply + %))
       (count-increasing-pairs)))
