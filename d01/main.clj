@@ -12,8 +12,7 @@
 (defn count-increasing-pairs [seq]
   (->> seq
        (partition 2 1)
-       (map (fn [pair] (apply < pair)))
-       (filter identity)
+       (filter #(apply < %))
        (count)))
 
 (println "Part 1")
