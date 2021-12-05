@@ -29,15 +29,16 @@
 (println "part1"
          (* (gamma) (epsilon)))
 
-(defn max-at-index [l i]
+(defn internal-at-index [key-fn l i]
   (->> (map #(nth % i) l)
        (frequencies)
-       (#(key (apply max-key val %)))))
+       (#(key (apply key-fn val %)))))
+
+(defn max-at-index [l i]
+  (internal-at-index max-key l i))
 
 (defn min-at-index [l i]
-  (->> (map #(nth % i) l)
-       (frequencies)
-       (#(key (apply min-key val %)))))
+  (internal-at-index min-key l i))
 
 (defn scan-filter [sel-fn l]
   (loop [i 0
