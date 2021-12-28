@@ -1,0 +1,2 @@
+{:deps
+ {symmsaur/aoclib {:local/root "../aoclib"}}}
