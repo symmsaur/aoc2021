@@ -1,14 +1,8 @@
 (ns aoc2021.d01
-  (:require [clojure.string :as string]
-            [clojure.edn :as edn]
-            [clojure.java.io :as io]))
-;; generic
-(defn read-input []
-  (->> (slurp (io/resource "d01/input"))
-       (string/split-lines)
-       (map edn/read-string)))
+  (:require [aoc2021.input :as input]))
 
-;; specific
+(def input (input/read-lines "d01"))
+
 (defn count-increasing-pairs [seq]
   (->> seq
        (partition 2 1)
@@ -16,9 +10,9 @@
        (count)))
 
 (defn part1 []
-  (count-increasing-pairs (read-input)))
+  (count-increasing-pairs input))
 
-(defn part2 [] (->> (read-input)
-       (partition 3 1)
-       (map #(apply + %))
-       (count-increasing-pairs)))
+(defn part2 [] (->> input
+                    (partition 3 1)
+                    (map #(apply + %))
+                    (count-increasing-pairs)))
