@@ -1,5 +1,5 @@
-(ns noob
-  (:require [al.image]))
+(ns noob)
+  (:require [al.image :as img])
 
 (defn neighbors [image x y]
   (let [left (- x 1)
@@ -13,16 +13,16 @@
      (concat (if (< down (:height image)) [[x down]])))))
 
 (defn is-low-point [image x y]
-  (let [val (pixel image x y)
+  (let [val (image/pixel image x y)
         left (- x 1)
         up (- y 1)
         right (+ x 1)
         down (+ y 1)]
     (->>
-     (or (< left 0) (< val (pixel image left y)))
-     (and (or (>= right (:width image)) (< val (pixel image right y))))
-     (and (or (< up 0) (< val (pixel image x up))))
-     (and (or (>= down (:height image)) (< val (pixel image x down)))))))
+     (or (< left 0) (< val (image/pixel image left y)))
+     (and (or (>= right (:width image)) (< val (image/pixel image right y))))
+     (and (or (< up 0) (< val (image/pixel image x up))))
+     (and (or (>= down (:height image)) (< val (image/pixel image x down)))))))
 
 (defn find-low-points [image]
   (->>
@@ -32,10 +32,10 @@
    (filter identity)))
 
 (defn part1 []
-  (let [image (img/read)]
+  (let [image (image/read)]
     (->>
      (find-low-points image)
-     (map #(apply pixel image %))
+     (map #(apply image/pixel image %))
      (map #(+ 1 %))
      (reduce +))))
 
@@ -44,9 +44,9 @@
          candidates [[start-x start-y]]
          touched #{}]
     (if-let [[x y] (first candidates)]
-      (let [inside (and (not= guard-val (pixel image x y))
+      (let [inside (and (not= guard-val (image/pixel image x y))
                         (not (contains? touched [x y])))]
-        (recur (if inside (img/set-pixel image val x y)
+        (recur (if inside (image/set-pixel image val x y)
                    image)
                (into (subvec candidates 1)
                      (if inside (neighbors image x y)))
@@ -55,7 +55,7 @@
       [image touched])))
 
 (defn region-sizes [image]
-  (loop [image (read-image)
+  (loop [image (image/read)
          [pos & low-points] (find-low-points image)
          counts []
          val \a]
@@ -68,7 +68,7 @@
       counts)))
 
 (defn part2 []
-  (->> (read-image)
+  (->> (image/read-image)
        (region-sizes)
        (sort)
        (take-last 3)
