@@ -6,7 +6,8 @@
 (defn slurp-day [day]
   (slurp (io/resource (str day "/input"))))
 
-(defn read-lines [day]
-  (->> (slurp-day day)
-       (string/split-lines)
-       (map edn/read-string)))
+(defn read-lines
+  ([day] (read-lines day edn/read-string))
+  ([day f] (->> (slurp-day day)
+                (string/split-lines)
+                (map f))))
