@@ -1,17 +1,13 @@
-(ns noob
-  (:gen-class)
-  (:require [clojure.string :as string]
-            [clojure.edn :as edn]))
+(ns aoc2021.d03
+  (:require [aoc2021.input :as input]))
 
-(defn read-input []
-  (->> (slurp "test")
-       string/split-lines))
+(def input (input/raw-lines "d03"))
 
 (defn transpose [vv]
   (apply mapv vector vv))
 
 (defn gamma []
-  (->> (read-input)
+  (->> input
        (transpose)
        (map frequencies)
        (map (fn [kv] (key (apply max-key val kv))))
@@ -19,15 +15,15 @@
        (#(read-string (str "2r" %)))))
 
 (defn epsilon []
-  (->> (read-input)
+  (->> input
        (transpose)
        (map frequencies)
        (map (fn [kv] (key (apply min-key val kv))))
        (string/join)
        (#(read-string (str "2r" %)))))
 
-(println "part1"
-         (* (gamma) (epsilon)))
+(defn part1 []
+  (* (gamma) (epsilon)))
 
 (defn internal-at-index [key-fn l i]
   (->> (map #(nth % i) l)
@@ -60,5 +56,5 @@
 (defn co-2 []
   (rating min-at-index))
 
-(println "part2"
-         (* (oxygen) (co-2)))
+(defn part2 []
+  (* (oxygen) (co-2)))
