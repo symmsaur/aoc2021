@@ -1,4 +1,4 @@
-(ns heap
+(ns al.heap
   (:import (clojure.lang IPersistentCollection)))
 
 (defn parent [idx]

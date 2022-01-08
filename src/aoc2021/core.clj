@@ -2,7 +2,8 @@
   (:gen-class)
   (:require [aoc2021.d01 :as d01]
             [aoc2021.d02 :as d02]
-            [aoc2021.d02 :as d03]))
+            [aoc2021.d03 :as d03]
+            [aoc2021.d15 :as d15]))
 
 (defn -main
   "Advent of Code 2021"
@@ -15,4 +16,8 @@
   (println "Part 2" (d02/part2))
   (println "Day 3")
   (println "Part 1" (d03/part1))
-  (println "Part 2" (d03/part2)))
+  (println "Part 2" (d03/part2))
+  (println "...")
+  (println "Day 15")
+  (println "Part 1" (d15/part1))
+  (println "Part 2" (d15/part2)))

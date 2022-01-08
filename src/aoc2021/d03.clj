@@ -1,5 +1,6 @@
 (ns aoc2021.d03
-  (:require [aoc2021.input :as input]))
+  (:require [aoc2021.input :as input]
+            [clojure.string :as string]))
 
 (def input (input/raw-lines "d03"))
 
@@ -46,7 +47,7 @@
       (first l))))
 
 (defn rating [sel-fn]
-  (->> (read-input)
+  (->> input
        (scan-filter sel-fn)
        (#(read-string (str "2r" %)))))
 
