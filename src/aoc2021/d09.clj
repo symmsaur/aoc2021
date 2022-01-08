@@ -1,5 +1,7 @@
-(ns noob)
-  (:require [al.image :as img])
+(ns aoc2021.d09
+  (:require [al.image :as image]))
+
+(def input (image/read-image "d09"))
 
 (defn neighbors [image x y]
   (let [left (- x 1)
@@ -32,7 +34,7 @@
    (filter identity)))
 
 (defn part1 []
-  (let [image (image/read)]
+  (let [image input]
     (->>
      (find-low-points image)
      (map #(apply image/pixel image %))
@@ -55,7 +57,7 @@
       [image touched])))
 
 (defn region-sizes [image]
-  (loop [image (image/read)
+  (loop [image image
          [pos & low-points] (find-low-points image)
          counts []
          val \a]
@@ -68,7 +70,7 @@
       counts)))
 
 (defn part2 []
-  (->> (image/read-image)
+  (->> input
        (region-sizes)
        (sort)
        (take-last 3)
