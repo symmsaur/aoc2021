@@ -1,4 +1,4 @@
-(ns aoc2021.input
+(ns al.input
   (:require [clojure.string :as string]
             [clojure.edn :as edn]
             [clojure.java.io :as io]))

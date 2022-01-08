@@ -1,7 +1,7 @@
 (ns aoc2021.d02
   (:require [clojure.string :as string]
             [clojure.edn :as edn]
-            [aoc2021.input :as input]))
+            [al.input :as input]))
 
 (defn parse-line [line]
   (let [[p1 p2] line]

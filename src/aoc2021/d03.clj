@@ -1,5 +1,5 @@
 (ns aoc2021.d03
-  (:require [aoc2021.input :as input]
+  (:require [al.input :as input]
             [clojure.string :as string]))
 
 (def input (input/raw-lines "d03"))

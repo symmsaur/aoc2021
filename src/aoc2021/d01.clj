@@ -1,5 +1,5 @@
 (ns aoc2021.d01
-  (:require [aoc2021.input :as input]))
+  (:require [al.input :as input]))
 
 (def input (input/read-lines "d01"))
 
