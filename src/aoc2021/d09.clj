@@ -3,17 +3,6 @@
 
 (def input (image/read-image "d09"))
 
-(defn neighbors [image x y]
-  (let [left (- x 1)
-        up (- y 1)
-        right (+ x 1)
-        down (+ y 1)]
-    (->>
-     (if (>= left 0) [[left y]])
-     (concat (if (< right (:width image)) [[right y]]))
-     (concat (if (>= up 0) [[x up]]))
-     (concat (if (< down (:height image)) [[x down]])))))
-
 (defn is-low-point [image x y]
   (let [val (image/pixel image x y)
         left (- x 1)
@@ -51,7 +40,7 @@
         (recur (if inside (image/set-pixel image val x y)
                    image)
                (into (subvec candidates 1)
-                     (if inside (neighbors image x y)))
+                     (if inside (image/neighbors image x y)))
                (if inside (conj touched [x y])
                    touched)))
       [image touched])))

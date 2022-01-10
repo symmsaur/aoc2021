@@ -23,6 +23,18 @@
                   (count (first vv))
                   (count vv))))))
 
+(defn neighbors [image x y]
+  (let [left (- x 1)
+        up (- y 1)
+        right (+ x 1)
+        down (+ y 1)]
+    (->>
+     (if (>= left 0) [[left y]])
+     (concat (if (< right (:width image)) [[right y]]))
+     (concat (if (>= up 0) [[x up]]))
+     (concat (if (< down (:height image)) [[x down]])))))
+
+
 (defn print-image [image]
   (println (:width image) "x" (:height image) ":")
   (doseq [y (range (:width image))]
