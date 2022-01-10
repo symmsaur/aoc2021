@@ -12,6 +12,11 @@
 (defn swap [v i j]
   (assoc v i (v j) j (v i)))
 
+(defn lt [a b]
+  (if (= (compare a b) -1)
+    true
+    false))
+
 (defn sift-up
   "Sift up the last element in a heapy vector"
   [heapv]
@@ -19,7 +24,7 @@
          idx (- (count heapv) 1)
          pdx (parent idx)]
     (if (and (not= idx pdx)
-             (< (heapv idx) (heapv pdx)))
+             (lt (heapv idx) (heapv pdx)))
       (recur (swap heapv idx pdx)
              pdx
              (parent pdx))
@@ -31,13 +36,13 @@
   (loop [heapv heapv
          idx 0]
     (let [[cdx1 cdx2] (children idx)
-          child1-smaller (and (< cdx1 (count heapv))
-                              (< (heapv cdx1) (heapv idx)))
-          child2-smaller (and (< cdx2 (count heapv))
-                              (< (heapv cdx2) (heapv idx)))
+          child1-smaller (and (lt cdx1 (count heapv))
+                              (lt (heapv cdx1) (heapv idx)))
+          child2-smaller (and (lt cdx2 (count heapv))
+                              (lt (heapv cdx2) (heapv idx)))
           child2<child1  (and child1-smaller
                               child2-smaller
-                              (< (heapv cdx2) (heapv cdx1)))
+                              (lt (heapv cdx2) (heapv cdx1)))
           swap-idx (case [child1-smaller child2-smaller child2<child1]
                      [true false false] cdx1
                      [true true false] cdx1
