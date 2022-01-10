@@ -22,3 +22,9 @@
           (Image. (into [] (apply concat vv))
                   (count (first vv))
                   (count vv))))))
+
+(defn print-image [image]
+  (println (:width image) "x" (:height image) ":")
+  (doseq [y (range (:width image))]
+    (let [i (* y (:width image))]
+    (println (apply str (subvec (:data image) i (+ i (:width image))))))))
