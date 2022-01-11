@@ -2,8 +2,11 @@
   (:require [al.heap :refer :all]
             [clojure.test :refer :all]))
 
-;; (defn is-heap? [v]
-;;   )
+(defn is-heap? [v]
+  (every? identity
+          (for [i (range (count v))]
+            (<= (nth v (parent i))
+                (nth v i)))))
 
 (deftest make-heap-test
   (testing "Create empty"
@@ -21,7 +24,10 @@
   (testing "Create with two elements out of order"
     (let [h (make-heap [2 1])]
       (is (= 2 (count h)))
-      (is (= 1 (peek h))))))
+      (is (= 1 (peek h)))))
+  (testing "Create with many elements out of order"
+    (let [h (make-heap [2 1 2 14 12 5 1 2 4 37 21 1 3 5])]
+      (is (is-heap? (:data h))))))
 
 (deftest conj-test
   (testing "Add to empty"
