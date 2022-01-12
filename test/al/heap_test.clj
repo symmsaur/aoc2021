@@ -27,7 +27,7 @@
       (is (= 1 (peek h)))))
   (testing "Create with many elements out of order"
     (let [h (make-heap [2 1 2 14 12 5 1 2 4 37 21 1 3 5])]
-      (is (is-heap? (:data h))))))
+      (is (is-heap? (.data h))))))
 
 (deftest conj-test
   (testing "Add to empty"
@@ -46,4 +46,13 @@
 (deftest pop-test
   (testing "Pop from one"
     (let [h (pop (make-heap [1]))]
-      (is (= 0 (count h))))))
+      (is (= 0 (count h)))))
+  (testing "Pop until empty from many elements"
+    (loop [h (make-heap [5 1 3 1 2 4])
+           prev -1]
+      (if (> (count h) 0)
+        (do
+          (is (is-heap? (.data h)))
+          (is (<= prev (peek h)))
+          (recur (pop h)
+                 (peek h)))))))

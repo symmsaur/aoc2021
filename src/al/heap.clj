@@ -47,7 +47,7 @@
                      [true false false] cdx1
                      [true true false] cdx1
                      [true true true] cdx2
-                     [false true & rest] cdx2
+                     [false true false] cdx2
                      idx)]
       (if (not= swap-idx idx)
         (recur (swap heapv idx swap-idx)
