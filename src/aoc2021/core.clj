@@ -9,6 +9,8 @@
 (defn -main
   "Advent of Code 2021"
   [& args]
+  (println "Advent of Code 2021")
+  (println "===================")
   (println "Day 1")
   (println "Part 1" (d01/part1))
   (println "Part 2" (d01/part2))
