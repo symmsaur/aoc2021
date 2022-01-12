@@ -36,9 +36,9 @@
   (loop [heapv heapv
          idx 0]
     (let [[cdx1 cdx2] (children idx)
-          child1-smaller (and (lt cdx1 (count heapv))
+          child1-smaller (and (< cdx1 (count heapv))
                               (lt (heapv cdx1) (heapv idx)))
-          child2-smaller (and (lt cdx2 (count heapv))
+          child2-smaller (and (< cdx2 (count heapv))
                               (lt (heapv cdx2) (heapv idx)))
           child2<child1  (and child1-smaller
                               child2-smaller
